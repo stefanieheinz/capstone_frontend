@@ -14,6 +14,8 @@
       <router-link to="/bars">All Bars</router-link>
       |
       <router-link to="/crawls">All Crawls</router-link>
+      |
+      <router-link to="/crawls/new">New Crawl</router-link>
     </div>
     <router-view />
   </div>

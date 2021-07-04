@@ -12,6 +12,8 @@
       <router-link to="/logout">Logout</router-link>
       |
       <router-link to="/bars">All Bars</router-link>
+      |
+      <router-link to="/crawls">All Crawls</router-link>
     </div>
     <router-view />
   </div>

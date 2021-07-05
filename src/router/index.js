@@ -7,6 +7,7 @@ import Logout from "../views/Logout.vue";
 import BarsIndex from "../views/BarsIndex.vue";
 import CrawlsIndex from "../views/CrawlsIndex.vue";
 import CrawlsNew from "../views/CrawlsNew.vue";
+import CrawlsShow from "../views/CrawlsShow.vue";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,7 @@ const routes = [
   { path: "/bars", name: "bars-index", component: BarsIndex },
   { path: "/crawls", name: "crawls-index", component: CrawlsIndex },
   { path: "/crawls/new", name: "crawls-new", component: CrawlsNew },
+  { path: "/cralws/:id", name: "crawls-show", component: CrawlsShow },
 ];
 
 const router = new VueRouter({

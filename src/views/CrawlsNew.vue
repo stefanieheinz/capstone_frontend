@@ -27,14 +27,14 @@ export default {
   methods: {
     createCrawl: function () {
       var params = {
-        name: this.newCrawl.date,
-        width: this.newCrawl.name,
+        date: this.newCrawl.date,
+        name: this.newCrawl.name,
       };
       axios
-        .post("/crawls", params)
+        .post("http://localhost:3000/crawls", params)
         .then((response) => {
-          console.log("crawls create", response);
-          this.$router.push("/crawls");
+          console.log(response.data);
+          this.crawls.push(response.data);
         })
         .catch((error) => {
           console.log("crawls create error", error.response);

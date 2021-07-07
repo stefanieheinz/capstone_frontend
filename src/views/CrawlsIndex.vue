@@ -10,6 +10,7 @@
         <h1>Crawl Info</h1>
         <p>Crawl Name: {{ currentCrawl.name }}</p>
         <p>Crawl Date: {{ currentCrawl.date }}</p>
+        <button v-on:click="updateCrawl(currentCrawl)">Update</button>
         <button>Close</button>
       </form>
     </dialog>
@@ -38,6 +39,16 @@ export default {
     showCrawl: function (crawl) {
       this.currentCrawl = crawl;
       document.querySelector("#crawl-details").showModal();
+    },
+    updateCrawl: function (crawl) {
+      console.log("update crawl", crawl);
+      var params = {
+        name: crawl.name,
+        date: crawl.date,
+      };
+      axios.patch("http://localhost:3000/crawls" + crawl.id, params).then((response) => {
+        console.log("Update success", response.data);
+      });
     },
   },
 };

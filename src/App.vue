@@ -7,10 +7,10 @@
           <header>
             <h1><a href="index.html" id="logo">Crwl</a></h1>
             <hr />
-            <p>Another fine freebie by HTML5 UP</p>
+            <p>Ready to party?!</p>
           </header>
           <footer>
-            <a href="#banner" class="button circled scrolly">Start</a>
+            <a href="#banner" class="button circled scrolly">Let's do it!</a>
           </footer>
         </div>
 
@@ -19,7 +19,7 @@
           <ul>
             <li><a href="index.html">Home</a></li>
             <li>
-              <a href="#">Dropdown</a>
+              <a href="#">Menu</a>
               <ul>
                 <li><a href="/signup">Signup</a></li>
                 <li><a href="/login">Login</a></li>
@@ -189,24 +189,7 @@
 </template>
 
 <style>
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+header {
+  background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cntraveler.com%2Fgallery%2Fbest-bars-in-charlotte&psig=AOvVaw3ENwycYcg9Arx5Id3QTpUc&ust=1625706218668000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCODjvuHhz_ECFQAAAAAdAAAAABAD");
 }
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-} */
 </style>

@@ -31,7 +31,7 @@ const routes = [
   { path: "/bars", name: "bars-index", component: BarsIndex },
   { path: "/crawls", name: "crawls-index", component: CrawlsIndex },
   { path: "/crawls/new", name: "crawls-new", component: CrawlsNew },
-  { path: "/cralws/:id", name: "crawls-show", component: CrawlsShow },
+  { path: "/crawls/:id", name: "crawls-show", component: CrawlsShow },
 ];
 
 const router = new VueRouter({

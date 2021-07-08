@@ -34,7 +34,7 @@ export default {
         .post("http://localhost:3000/crawls", params)
         .then((response) => {
           console.log(response.data);
-          this.crawls.push(response.data);
+          this.$router.push("/crawls");
         })
         .catch((error) => {
           console.log("crawls create error", error.response);

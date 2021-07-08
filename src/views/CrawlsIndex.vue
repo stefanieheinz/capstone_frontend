@@ -3,7 +3,7 @@
     <h1>All Crawls</h1>
     <div v-for="crawl in crawls" v-bind:key="crawl.id">
       <h2>{{ crawl.name }}</h2>
-      <button v-on:click="showCrawl(crawl)">More info</button>
+      <router-link class="special" v-bind:to="`/crawls/${crawl.id}`">More Info</router-link>
     </div>
     <dialog id="crawl-details">
       <form>
@@ -36,10 +36,10 @@ export default {
         this.crawls = response.data;
       });
     },
-    showCrawl: function (crawl) {
-      this.currentCrawl = crawl;
-      document.querySelector("#crawl-details").showModal();
-    },
+    // showCrawl: function (crawl) {
+    //   this.currentCrawl = crawl;
+    //   document.querySelector("#crawl-details").showModal();
+    // },
     updateCrawl: function (crawl) {
       console.log("update crawl", crawl);
       var params = {

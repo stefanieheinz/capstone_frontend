@@ -26,18 +26,14 @@
 </template>
 
 <style>
-body {
-  margin: 0;
-  padding: 0;
-}
 #map {
-  width: 100%;
   height: 300px;
+  width: 100%;
 }
 </style>
 
 <script>
-/* global mapboxgl */
+/* global mapboxgl, MapboxDirections, mapboxSdk */
 import axios from "axios";
 export default {
   data: function () {
@@ -48,15 +44,17 @@ export default {
       errors: [],
     };
   },
-  created: function () {
+  mounted: function () {
     this.showCrawl();
     this.indexBars();
   },
+  created: function () {},
   methods: {
     showCrawl: function () {
       axios.get("/crawls/" + this.$route.params.id).then((response) => {
         console.log("show crawls", response.data);
         this.crawl = response.data;
+        this.setupMap();
       });
     },
     indexBars: function () {
@@ -80,26 +78,51 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
-  },
-  mounted: function () {
-    mapboxgl.accessToken =
-      "pk.eyJ1Ijoic3RlZmFuaWVoZWlueiIsImEiOiJja3B2YTR1cmIxM2szMnVxdWNtOHFiencyIn0.OSiYqhH8bpXuJbsLPHtqbg";
-    var map = new mapboxgl.Map({
-      container: "map", // container id
-      style: "mapbox://styles/mapbox/streets-v11", // style URL
-      center: [-104.9903, 39.7392], // starting position [lng, lat]
-      zoom: 9, // starting zoom
-    });
-    console.log(map);
+    setupMap: function () {
+      mapboxgl.accessToken =
+        "pk.eyJ1Ijoic3RlZmFuaWVoZWlueiIsImEiOiJja3B2YTR1cmIxM2szMnVxdWNtOHFiencyIn0.OSiYqhH8bpXuJbsLPHtqbg";
+      var map = new mapboxgl.Map({
+        container: "map", // container id
+        style: "mapbox://styles/mapbox/streets-v11", // style URL
+        center: [-104.9903, 39.7392], // starting position [lng, lat]
+        zoom: 9, // starting zoom
+      });
 
-    // create the popup
-    var popup = new mapboxgl.Popup({ offset: 25 }).setText("People do mad weed here.");
-    // Create a default Marker and add it to the map.
-    var marker1 = new mapboxgl.Marker().setLngLat([-104.9903, 39.7392]).setPopup(popup).addTo(map);
-    console.log(marker1);
-    // Create a default Marker, colored black, rotated 45 degrees.
-    var marker2 = new mapboxgl.Marker({ color: "black", rotation: 45 }).setLngLat([-105.270546, 40.014984]).addTo(map);
-    console.log(marker2);
+      map.addControl(
+        new MapboxDirections({
+          accessToken: mapboxgl.accessToken,
+        }),
+        "top-left"
+      );
+      console.log("Add bar markers", this.crawl.bars);
+      var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+      this.crawl.bars.forEach((bar) => {
+        mapboxClient.geocoding
+          .forwardGeocode({
+            query: bar.address,
+            autocomplete: false,
+            limit: 1,
+          })
+          .send()
+          .then(function (response) {
+            if (response && response.body && response.body.features && response.body.features.length) {
+              var feature = response.body.features[0];
+              // Create a marker and add it to the map.
+              var popup = new mapboxgl.Popup({ offset: 25 }).setText(bar.name);
+              new mapboxgl.Marker().setLngLat(feature.center).setPopup(popup).addTo(map);
+            }
+          });
+      });
+
+      // // create the popup
+      // var popup = new mapboxgl.Popup({ offset: 25 }).setText(".");
+      // // Create a default Marker and add it to the map.
+      // var marker1 = new mapboxgl.Marker().setLngLat([-104.9903, 39.7392]).setPopup(popup).addTo(map);
+      // console.log(marker1);
+      // // Create a default Marker, colored black, rotated 45 degrees.
+      // var marker2 = new mapboxgl.Marker({ color: "black", rotation: 45 }).setLngLat([-105.270546, 40.014984]).addTo(map);
+      // console.log(marker2);
+    },
   },
 };
 </script>

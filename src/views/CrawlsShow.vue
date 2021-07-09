@@ -1,5 +1,6 @@
 <template>
   <div class="crawls-show">
+    <div id="map"></div>
     <h2>{{ crawl.name }}</h2>
     <p>Date: {{ crawl.date }}</p>
     <p>Name: {{ crawl.name }}</p>
@@ -24,7 +25,19 @@
   </div>
 </template>
 
+<style>
+body {
+  margin: 0;
+  padding: 0;
+}
+#map {
+  width: 100%;
+  height: 300px;
+}
+</style>
+
 <script>
+/* global mapboxgl */
 import axios from "axios";
 export default {
   data: function () {
@@ -67,6 +80,26 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
+  },
+  mounted: function () {
+    mapboxgl.accessToken =
+      "pk.eyJ1Ijoic3RlZmFuaWVoZWlueiIsImEiOiJja3B2YTR1cmIxM2szMnVxdWNtOHFiencyIn0.OSiYqhH8bpXuJbsLPHtqbg";
+    var map = new mapboxgl.Map({
+      container: "map", // container id
+      style: "mapbox://styles/mapbox/streets-v11", // style URL
+      center: [-104.9903, 39.7392], // starting position [lng, lat]
+      zoom: 9, // starting zoom
+    });
+    console.log(map);
+
+    // create the popup
+    var popup = new mapboxgl.Popup({ offset: 25 }).setText("People do mad weed here.");
+    // Create a default Marker and add it to the map.
+    var marker1 = new mapboxgl.Marker().setLngLat([-104.9903, 39.7392]).setPopup(popup).addTo(map);
+    console.log(marker1);
+    // Create a default Marker, colored black, rotated 45 degrees.
+    var marker2 = new mapboxgl.Marker({ color: "black", rotation: 45 }).setLngLat([-105.270546, 40.014984]).addTo(map);
+    console.log(marker2);
   },
 };
 </script>

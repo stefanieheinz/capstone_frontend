@@ -17,9 +17,11 @@
       <span>Selected: {{ newBarCrawl.bar_id }}</span>
       <input type="submit" value="Create" />
     </form>
-    <div v-for="bar in crawl.bars" v-bind:key="bar.id">
-      {{ bar.name }}
-      {{ bar.address }}
+    <div v-for="barCrawl in crawl.bar_crawls" v-bind:key="barCrawl.id">
+      {{ barCrawl.bar.name }}
+      {{ barCrawl.bar.address }}
+      <input type="datetime-local" name="meeting-time" v-model="barCrawl.formatted_scheduled_time" />
+      <button v-on:click="updateBarCrawl(barCrawl)">Update</button>
     </div>
     <router-link class="special" to="/crawls">Back to all crawls</router-link>
   </div>
@@ -78,14 +80,31 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
+    showBarCrawl: function () {
+      axios.get("/bar_crawls/" + this.$route.params.id).then((response) => {
+        console.log("show bar crawls scheduled time", response.data);
+        this.bar_crawls = response.data;
+      });
+    },
+    updateBarCrawl: function (barCrawl) {
+      var params = {
+        bar_id: barCrawl.bar.id,
+        crawl_id: this.$route.params.id,
+        scheduled_time: barCrawl.formatted_scheduled_time,
+      };
+      axios.patch("/bar_crawls/" + barCrawl.id, params).then((response) => {
+        console.log("bar crawls update scheduled time", response);
+        // this.$router.push("/bar_crawls");
+      });
+    },
     setupMap: function () {
       mapboxgl.accessToken =
         "pk.eyJ1Ijoic3RlZmFuaWVoZWlueiIsImEiOiJja3B2YTR1cmIxM2szMnVxdWNtOHFiencyIn0.OSiYqhH8bpXuJbsLPHtqbg";
       var map = new mapboxgl.Map({
         container: "map", // container id
         style: "mapbox://styles/mapbox/streets-v11", // style URL
-        center: [-104.9903, 39.7392], // starting position [lng, lat]
-        zoom: 9, // starting zoom
+        center: [-104.9909, 39.7545], // starting position [lng, lat]
+        zoom: 16, // starting zoom
       });
 
       map.addControl(

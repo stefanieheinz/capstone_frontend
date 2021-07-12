@@ -1869,7 +1869,7 @@ header {
 }
 
 header > p {
-  background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cntraveler.com%2Fgallery%2Fbest-bars-in-charlotte&psig=AOvVaw3ENwycYcg9Arx5Id3QTpUc&ust=1625706218668000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCODjvuHhz_ECFQAAAAAdAAAAABAD");
+  background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cntraveler.com%2Fgallery%2Fbest-bars-in-https://images.unsplash.com/photo-1575444758702-4a6b9222336e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80&psig=AOvVaw3ENwycYcg9Arx5Id3QTpUc&ust=1625706218668000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCODjvuHhz_ECFQAAAAAdAAAAABAD");
   display: block;
   font-size: 1.5em;
   margin: 1em 0 2em 0;
@@ -2281,14 +2281,15 @@ header .icon.circled {
 
 #header {
   position: relative;
-  background-image: url("../../images/header.jpg");
-  background-size: cover;
+  background-image: url("../../images/arrow.jpg");
+  background-size: contain;
   background-position: center center;
   background-attachment: fixed;
   color: #fff;
   text-align: center;
   padding: 7.5em 0 2em 0;
   cursor: default;
+  width: 100%;
 }
 
 #header:before {
@@ -2617,7 +2618,7 @@ body.homepage.is-preload #header:after {
 
 /* Carousel */
 
-.carousel {
+/* .carousel {
   position: relative;
   overflow: hidden;
   padding: 2em 0 2em 0;
@@ -2661,7 +2662,8 @@ body.homepage.is-preload #header:after {
   position: absolute;
   top: 50%;
   margin: -1.5em 0 0 0;
-  background: url("images/arrow.jpg") no-repeat center center;
+  background: url("../../images/arrow.jpg");
+  background-repeat: no-repeat;
 }
 
 .carousel .forward:hover:before,
@@ -2734,24 +2736,24 @@ body.homepage.is-preload #header:after {
 
 .carousel article p {
   text-align: center;
-}
+} */
 
 /* Wide */
 
-@media screen and (max-width: 1680px) {
-  /* Basic */
+/* @media screen and (max-width: 1680px) { */
+/* Basic */
 
-  body,
+/* body,
   input,
   textarea,
   select {
     font-size: 14pt;
     line-height: 1.75em;
-  }
+  } */
 
-  /* Carousel */
+/* Carousel */
 
-  .carousel {
+/* .carousel {
     padding: 1.5em 0 1.5em 0;
   }
 
@@ -2763,7 +2765,7 @@ body.homepage.is-preload #header:after {
     width: 18em;
     margin: 0 1.25em 0 0;
   }
-}
+} */
 
 /* Normal */
 

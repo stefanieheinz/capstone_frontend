@@ -10,7 +10,7 @@
             <p>Ready to party?!</p>
           </header>
           <footer>
-            <a href="#banner" class="button circled scrolly">Let's do it!</a>
+            <!-- <a href="#banner" class="button circled scrolly">Let's do it!</a> -->
           </footer>
         </div>
 
@@ -31,6 +31,9 @@
             </li>
           </ul>
         </nav>
+        <div class="container">
+          <div v-if="flashMessage" class="alert alert-success" role="alert">{{ flashMessage }}</div>
+        </div>
       </div>
       <router-view />
       <div id="footer">
@@ -64,3 +67,13 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data: function () {
+    return {
+      flashMessage: null,
+    };
+  },
+};
+</script>

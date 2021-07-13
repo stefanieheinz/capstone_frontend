@@ -18,7 +18,7 @@
       <input type="submit" value="Add" />
     </form>
     <div v-for="barCrawl in sortedBarCrawls" v-bind:key="barCrawl.id">
-      {{ barCrawl.bar.name }}
+      <span v-on:click="selectBar(barCrawl.bar)">{{ barCrawl.bar.name }}</span>
       {{ barCrawl.bar.address }}
       <input type="datetime-local" name="meeting-time" v-model="barCrawl.formatted_scheduled_time" />
       <button v-on:click="updateBarCrawl(barCrawl)">Update</button>
@@ -44,6 +44,7 @@ export default {
       bars: [],
       newBarCrawl: {},
       errors: [],
+      directions: null,
     };
   },
   mounted: function () {
@@ -86,6 +87,24 @@ export default {
         this.bar_crawls = response.data;
       });
     },
+    selectBar: function (bar) {
+      console.log(bar);
+      var previousBar;
+      var index = 0;
+      while (index < this.sortedBarCrawls.length) {
+        if (bar.address === this.sortedBarCrawls[index].bar.address) {
+          if (index === 0) {
+            previousBar = bar;
+          } else {
+            previousBar = this.sortedBarCrawls[index - 1].bar;
+          }
+          break;
+        }
+        index = index + 1;
+      }
+      this.directions.setOrigin(previousBar.address);
+      this.directions.setDestination(bar.address);
+    },
     updateBarCrawl: function (barCrawl) {
       var params = {
         bar_id: barCrawl.bar.id,
@@ -106,13 +125,11 @@ export default {
         center: [-104.9909, 39.7545], // starting position [lng, lat]
         zoom: 16, // starting zoom
       });
-
-      map.addControl(
-        new MapboxDirections({
-          accessToken: mapboxgl.accessToken,
-        }),
-        "top-left"
-      );
+      var directions = new MapboxDirections({
+        accessToken: mapboxgl.accessToken,
+      });
+      this.directions = directions;
+      map.addControl(directions, "top-left");
       console.log("Add bar markers", this.crawl.bars);
       var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
       this.crawl.bars.forEach((bar) => {

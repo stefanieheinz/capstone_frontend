@@ -15,9 +15,9 @@
         </option>
       </select>
       <span>Selected: {{ newBarCrawl.bar_id }}</span>
-      <input type="submit" value="Create" />
+      <input type="submit" value="Add" />
     </form>
-    <div v-for="barCrawl in crawl.bar_crawls" v-bind:key="barCrawl.id">
+    <div v-for="barCrawl in sortedBarCrawls" v-bind:key="barCrawl.id">
       {{ barCrawl.bar.name }}
       {{ barCrawl.bar.address }}
       <input type="datetime-local" name="meeting-time" v-model="barCrawl.formatted_scheduled_time" />
@@ -40,7 +40,7 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      crawl: {},
+      crawl: { bar_crawls: [] },
       bars: [],
       newBarCrawl: {},
       errors: [],
@@ -141,6 +141,11 @@ export default {
       // // Create a default Marker, colored black, rotated 45 degrees.
       // var marker2 = new mapboxgl.Marker({ color: "black", rotation: 45 }).setLngLat([-105.270546, 40.014984]).addTo(map);
       // console.log(marker2);
+    },
+  },
+  computed: {
+    sortedBarCrawls: function () {
+      return this.crawl.bar_crawls.slice().sort((a, b) => (a.scheduled_time > b.scheduled_time ? 1 : -1));
     },
   },
 };

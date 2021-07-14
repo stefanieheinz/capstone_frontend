@@ -1,15 +1,15 @@
 <template>
-  <div class="crawls-new">
-    <h1>New Crawl</h1>
+  <div class="crawls-new container">
+    <h1 class="label">New Crawl</h1>
     <form v-on:submit.prevent="createCrawl()">
       <ul>
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
-      Date:
+      <h1 class="label">Date:</h1>
       <input type="text" v-model="newCrawl.date" />
-      Name:
+      <h1 class="label">Name:</h1>
       <input type="text" v-model="newCrawl.name" />
-      <input type="submit" value="Create" />
+      <input class="submit" type="submit" value="Create" />
     </form>
   </div>
 </template>
@@ -44,3 +44,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.label {
+  margin-left: 1.8em;
+}
+.submit {
+  margin-left: 44.5em;
+}
+</style>

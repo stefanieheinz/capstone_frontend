@@ -1,9 +1,8 @@
 <template>
   <div class="bars-index">
     <div id="map"></div>
-    <h1>All Bars</h1>
     <div v-for="bar in bars" v-bind:key="bar.id">
-      <h2>{{ bar.name }}</h2>
+      <!-- <h2>{{ bar.name }}</h2> -->
     </div>
   </div>
 </template>
@@ -35,7 +34,7 @@ export default {
         container: "map", // container id
         style: "mapbox://styles/mapbox/streets-v11", // style URL
         center: [-104.9909, 39.7545], // starting position [lng, lat]
-        zoom: 16, // starting zoom
+        zoom: 14, // starting zoom
       });
 
       map.addControl(
@@ -67,3 +66,26 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* h2 {
+  font-size: 2.85em;
+  text-align: center;
+  color: inherit;
+  border-bottom: solid 1px rgba(128, 128, 128, 0.15);
+  text-decoration: none;
+  -moz-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+  -webkit-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+  -ms-transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+  transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+} */
+
+h2:hover {
+  color: #ef8376;
+  border-bottom-color: transparent;
+}
+
+#map {
+  height: 500px;
+}
+</style>

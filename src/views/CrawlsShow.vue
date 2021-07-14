@@ -1,37 +1,63 @@
 <template>
   <div class="crawls-show">
-    <div id="map"></div>
-    <h2>{{ crawl.name }}</h2>
-    <p>Date: {{ crawl.date }}</p>
-    <p>Name: {{ crawl.name }}</p>
-    <form v-on:submit.prevent="createBarCrawl()">
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-      </ul>
-      Bar:
-      <select v-model="newBarCrawl.bar_id">
-        <option v-for="bar in bars" v-bind:value="bar.id" v-bind:key="bar.id">
-          {{ bar.name }}
-        </option>
-      </select>
-      <span>Selected: {{ newBarCrawl.bar_id }}</span>
-      <input type="submit" value="Add" />
-    </form>
-    <div v-for="barCrawl in sortedBarCrawls" v-bind:key="barCrawl.id">
-      <span v-on:click="selectBar(barCrawl.bar)">{{ barCrawl.bar.name }}</span>
-      {{ barCrawl.bar.address }}
-      <input type="datetime-local" name="meeting-time" v-model="barCrawl.formatted_scheduled_time" />
-      <button v-on:click="updateBarCrawl(barCrawl)">Update</button>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <section>
+            <h2 class="label">{{ crawl.name }}</h2>
+            <p class="label">Date: {{ crawl.date }}</p>
+            <form v-on:submit.prevent="createBarCrawl()">
+              <ul>
+                <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+              </ul>
+              <div class="fields">
+                <div class="field half">
+                  <label for="name">Bar</label>
+                  <select v-model="newBarCrawl.bar_id">
+                    <option v-for="bar in bars" v-bind:value="bar.id" v-bind:key="bar.id">
+                      {{ bar.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <ul class="actions">
+                <li><input type="submit" value="Add" class="primary" /></li>
+              </ul>
+            </form>
+          </section>
+          <div v-for="barCrawl in sortedBarCrawls" v-bind:key="barCrawl.id">
+            <div class="row">
+              <div class="col-6">
+                <h4 v-on:click="selectBar(barCrawl.bar)">{{ barCrawl.bar.name }}</h4>
+
+                {{ barCrawl.bar.address }}
+              </div>
+              <div class="col-6">
+                <input type="datetime-local" name="meeting-time" v-model="barCrawl.formatted_scheduled_time" />
+                <button class="button" v-on:click="updateBarCrawl(barCrawl)">Update</button>
+              </div>
+            </div>
+            <br />
+            <br />
+          </div>
+          <router-link class="special" to="/crawls">Back to all crawls</router-link>
+        </div>
+        <div class="col-6">
+          <div id="map"></div>
+        </div>
+      </div>
     </div>
-    <router-link class="special" to="/crawls">Back to all crawls</router-link>
   </div>
 </template>
 
-<style>
+<style scoped>
 #map {
-  height: 300px;
+  height: 75vh;
   width: 100%;
 }
+/* .label {
+  margin-left: 2em;
+} */
 </style>
 
 <script>

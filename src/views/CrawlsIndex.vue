@@ -1,8 +1,8 @@
 <template>
-  <div class="crawls-index">
-    <h1>All Crawls</h1>
+  <div class="crawls-index container">
+    <!-- <h1>All Crawls</h1> -->
     <div v-for="crawl in crawls" v-bind:key="crawl.id">
-      <h2>{{ crawl.name }}</h2>
+      <h2 class="crawl">{{ crawl.name }}</h2>
       <router-link tag="button" class="special" v-bind:to="`/crawls/${crawl.id}`">More Info</router-link>
     </div>
     <dialog id="crawl-details">
@@ -53,3 +53,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* .special {
+  margin-left: 66em;
+}
+.crawl {
+  margin-left: 14em;
+} */
+.crawls-index {
+  min-height: 50vh;
+}
+</style>

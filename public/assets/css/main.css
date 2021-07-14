@@ -212,6 +212,7 @@ h6 {
   font-weight: 400;
   color: #483949;
   line-height: 1.25em;
+  font-size: 20pt;
 }
 
 h1 a,
@@ -2055,6 +2056,7 @@ form label {
 form input[type="text"],
 form input[type="email"],
 form input[type="password"],
+form input[type="datetime-local"],
 form select,
 form textarea {
   -webkit-appearance: none;
@@ -2074,6 +2076,7 @@ form textarea {
 form input[type="text"]:focus,
 form input[type="email"]:focus,
 form input[type="password"]:focus,
+form input[type="datetime-local"]:focus,
 form select:focus,
 form textarea:focus {
   background: #fff;
@@ -2083,6 +2086,7 @@ form textarea:focus {
 form input[type="text"],
 form input[type="email"],
 form input[type="password"],
+form input[type="datetime-local"],
 form select {
   line-height: 1em;
 }
